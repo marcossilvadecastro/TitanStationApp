@@ -7,19 +7,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devtitans.titanstationapp.databinding.FragmentItemBinding;
-import com.devtitans.titanstationapp.view.placeholder.PlaceholderContent.PlaceholderItem;
+import com.devtitans.titanstationapp.model.Sensor;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<Sensor> mValues;
 
-    public SensorRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public SensorRecyclerViewAdapter(List<Sensor> items) {
         mValues = items;
     }
 
@@ -33,8 +30,8 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getName());
+        holder.mContentView.setText(mValues.get(position).getValue());
     }
 
     @Override
@@ -45,7 +42,7 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public Sensor mItem;
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());

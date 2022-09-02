@@ -2,7 +2,12 @@ package com.devtitans.titanstationapp.model;
 
 import android.media.Image;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Sensor {
+
     private String name;
     private String description;
     private String value;

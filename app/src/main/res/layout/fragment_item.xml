@@ -23,34 +23,31 @@
                 android:id="@+id/imageView"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:contentDescription="TODO"
-                card_view:layout_constraintBottom_toBottomOf="@+id/sensor_name"
+                android:contentDescription="sensor icon"
                 card_view:layout_constraintEnd_toStartOf="@+id/sensor_name"
-                card_view:layout_constraintHorizontal_bias="0.5"
+                card_view:layout_constraintHorizontal_bias="1.0"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="@+id/sensor_name" />
+                card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/sensor_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/sensor_title"
+                android:gravity="center|start"
                 android:textAppearance="?attr/textAppearanceListItem"
-                card_view:layout_constraintBottom_toTopOf="@id/barrier"
+                android:textSize="@dimen/sensor_title"
+                android:textStyle="bold"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintHorizontal_bias="0.5"
-                card_view:layout_constraintStart_toEndOf="@+id/imageView"
+                card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
                 tools:text="Temperature" />
 
             <TextView
-                android:layout_marginVertical="@dimen/min_margin"
                 android:id="@+id/sensor_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/text_margin"
+                android:layout_marginVertical="@dimen/min_margin"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="@dimen/text_size"

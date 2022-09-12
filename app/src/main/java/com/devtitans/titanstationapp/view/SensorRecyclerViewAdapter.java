@@ -46,8 +46,8 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            mIdView = binding.sensorName;
+            mContentView = binding.sensorValue;
         }
 
         @Override

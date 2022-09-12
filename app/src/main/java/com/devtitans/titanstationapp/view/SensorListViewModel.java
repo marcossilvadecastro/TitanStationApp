@@ -17,9 +17,9 @@ public class SensorListViewModel extends ViewModel {
     public void fakeSensors(){
         sensors = new ArrayList<Sensor>(
                 Arrays.asList(
-                        new Sensor("Sensor 1", "desc sensor 1", "100", null),
-                        new Sensor("Sensor 2", "desc sensor 2", "10", null),
-                        new Sensor("Sensor 3", "desc sensor 3", "99999", null)
+                        new Sensor("Temperature", "desc sensor 1", "100", null),
+                        new Sensor("Humidity", "desc sensor 2", "10", null),
+                        new Sensor("Pressure", "desc sensor 3", "99999", null)
                 )
         );
     }

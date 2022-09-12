@@ -35,6 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/sensor_title"
                 android:textAppearance="?attr/textAppearanceListItem"
                 card_view:layout_constraintBottom_toTopOf="@id/barrier"
                 card_view:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +46,11 @@
                 tools:text="Temperature" />
 
             <TextView
+                android:layout_marginVertical="@dimen/min_margin"
                 android:id="@+id/sensor_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
+                android:layout_marginHorizontal="@dimen/text_margin"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="@dimen/text_size"

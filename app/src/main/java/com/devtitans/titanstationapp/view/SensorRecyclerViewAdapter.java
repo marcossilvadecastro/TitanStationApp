@@ -2,6 +2,7 @@ package com.devtitans.titanstationapp.view;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
 
         holder.mIdView.setTextColor(mValues.get(position).getColor());
         holder.mContentView.setTextColor(mValues.get(position).getColor());
+        holder.image.setImageResource(mValues.get(position).getImage());
     }
 
     @Override
@@ -45,12 +47,14 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView image;
         public Sensor mItem;
 
         public ViewHolder(FragmentItemBinding binding) {
             super(binding.getRoot());
             mIdView = binding.sensorName;
             mContentView = binding.sensorValue;
+            image = binding.imageView;
         }
 
         @Override

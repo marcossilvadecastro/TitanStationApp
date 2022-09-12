@@ -20,14 +20,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="TODO"
                 card_view:layout_constraintBottom_toBottomOf="@+id/sensor_name"
                 card_view:layout_constraintEnd_toStartOf="@+id/sensor_name"
                 card_view:layout_constraintHorizontal_bias="0.5"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="@+id/sensor_name"
-                android:contentDescription="TODO" />
+                card_view:layout_constraintTop_toTopOf="@+id/sensor_name" />
 
             <TextView
                 android:id="@+id/sensor_name"

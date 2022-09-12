@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.devtitans.titanstationapp.R;
 
@@ -20,5 +22,13 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container_view_tag, SensorListFragment.class, null)
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
     }
 }

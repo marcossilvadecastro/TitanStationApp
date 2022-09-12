@@ -1,6 +1,9 @@
 package com.devtitans.titanstationapp.model;
 
+import android.graphics.Color;
 import android.media.Image;
+
+import com.devtitans.titanstationapp.util.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,12 +15,14 @@ public class Sensor {
     private String description;
     private String value;
     private Image image;
+    private int color;
 
     public Sensor(String name, String description, String value, Image image) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.image = image;
+        this.color = ColorUtils.getRandomColorByName(name);
     }
 
     public String getName() {
@@ -50,5 +55,13 @@ public class Sensor {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

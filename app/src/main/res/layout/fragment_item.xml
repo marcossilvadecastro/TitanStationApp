@@ -11,12 +11,13 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/cardview_default_radius"
+        android:elevation="@dimen/cardview_default_elevation"
         card_view:cardCornerRadius="@dimen/cardview_default_radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/min_margin">
 
             <ImageView
                 android:id="@+id/imageView"

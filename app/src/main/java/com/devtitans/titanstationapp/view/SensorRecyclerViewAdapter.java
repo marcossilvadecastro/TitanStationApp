@@ -32,6 +32,9 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getName());
         holder.mContentView.setText(mValues.get(position).getValue());
+
+        holder.mIdView.setTextColor(mValues.get(position).getColor());
+        holder.mContentView.setTextColor(mValues.get(position).getColor());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.devtitans.titanstationapp.view;
 
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class SensorRecyclerViewAdapter extends RecyclerView.Adapter<SensorRecycl
         holder.mIdView.setTextColor(mValues.get(position).getColor());
         holder.mContentView.setTextColor(mValues.get(position).getColor());
         holder.image.setImageResource(mValues.get(position).getImage());
+        holder.image.setColorFilter(mValues.get(position).getColor());
     }
 
     @Override

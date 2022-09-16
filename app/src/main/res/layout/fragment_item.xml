@@ -27,6 +27,7 @@
                android:layout_height="wrap_content"
                android:orientation="horizontal">
                <ImageView
+                   android:src="@drawable/ic_baseline_whatshot_24"
                    android:layout_gravity="center"
                    android:id="@+id/imageView"
                    android:layout_width="24dp"

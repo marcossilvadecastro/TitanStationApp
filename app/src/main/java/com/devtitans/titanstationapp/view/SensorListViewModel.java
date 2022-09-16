@@ -2,6 +2,8 @@ package com.devtitans.titanstationapp.view;
 
 import androidx.lifecycle.ViewModel;
 
+import com.devtitans.titanstationapp.model.Humidity;
+import com.devtitans.titanstationapp.model.Luminosity;
 import com.devtitans.titanstationapp.model.Sensor;
 import com.devtitans.titanstationapp.model.Temperature;
 
@@ -18,9 +20,9 @@ public class SensorListViewModel extends ViewModel {
     public void fakeSensors(){
         sensors = new ArrayList<Sensor>(
                 Arrays.asList(
-                        new Temperature("Temperature", "desc sensor 1", "100"),
-                        new Sensor("Humidity", "desc sensor 2", "10"),
-                        new Sensor("Pressure", "desc sensor 3", "99999")
+                        new Temperature("desc sensor 1", "100"),
+                        new Humidity( "desc sensor 2", "10"),
+                        new Luminosity("desc sensor 3", "99999")
                 )
         );
     }

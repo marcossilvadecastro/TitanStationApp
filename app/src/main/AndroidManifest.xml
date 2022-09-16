@@ -14,14 +14,21 @@
         android:theme="@style/Theme.TitanStationApp"
         tools:targetApi="31">
         <activity
-            android:label="@string/app_title"
-            android:name=".view.MainActivity"
-            android:exported="true">
+            android:name=".SplashScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:theme="@style/Theme.TitanStationApp.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false"
+            android:label="@string/app_title">
+
         </activity>
     </application>
 

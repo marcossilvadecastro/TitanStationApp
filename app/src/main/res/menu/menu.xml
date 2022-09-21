@@ -11,9 +11,9 @@
         android:title="Refresh" />
 
     <item
-        app:showAsAction="ifRoom"
         android:id="@+id/connection"
         android:icon="@drawable/ic_outline_toggle_off_24"
-        android:title="Connection" />
+        android:title="Connection"
+        app:showAsAction="ifRoom" />
 
 </menu>

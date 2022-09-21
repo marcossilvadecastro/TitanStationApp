@@ -5,14 +5,12 @@ import com.devtitans.titanstationapp.util.ColorUtils;
 public class Sensor {
 
     private String name;
-    private String description;
     private String value;
     private int image;
     private int color;
 
-    public Sensor(String name, String description, String value) {
+    public Sensor(String name, String value) {
         this.name = name;
-        this.description = description;
         this.value = value;
         this.color = ColorUtils.getRandomColorByName(name);
     }
@@ -23,14 +21,6 @@ public class Sensor {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getValue() {

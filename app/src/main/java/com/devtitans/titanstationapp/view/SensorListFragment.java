@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +46,7 @@ public class SensorListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
     }
 
     @Override
@@ -52,6 +56,7 @@ public class SensorListFragment extends Fragment {
         viewModel.fakeSensors();
         recyclerView.setAdapter(new SensorRecyclerViewAdapter(viewModel.getSensors()));
     }
+
 
     private RecyclerView recyclerView;
     @Override

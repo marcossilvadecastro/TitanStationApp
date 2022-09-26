@@ -13,7 +13,9 @@ import com.devtitans.titanstationapp.model.Temperature;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import devtitans.adademanager.AdadeManager;
 
@@ -52,7 +54,11 @@ public class SensorListViewModel extends ViewModel {
             }
 
             if(mOnGetData != null){
-                mOnGetData.onGetDada(sensors);
+                for (IOnGetData data : mOnGetData){
+                    if(data != null){
+                        data.onGetDada(sensors);
+                    }
+                }
             }
         }
     };
@@ -74,7 +80,7 @@ public class SensorListViewModel extends ViewModel {
                     vlrTemperature = -2;
                 }
             } while (vlrTemperature == -1);
-            sensors.add(new Temperature("" + vlrTemperature));
+            sensors.add(new Temperature(vlrTemperature/100 +  " °C"));
 
             count = 0;
             int vlrHumidity = 0;
@@ -86,7 +92,7 @@ public class SensorListViewModel extends ViewModel {
                     vlrHumidity = -2;
                 }
             } while (vlrHumidity == -1);
-            sensors.add(new Humidity("" + vlrHumidity));
+            sensors.add(new Humidity(vlrHumidity/100 + " %"));
 
             count = 0;
             int vlrLuminosity = 0;
@@ -99,7 +105,7 @@ public class SensorListViewModel extends ViewModel {
                 }
                 Thread.sleep(waitTime);
             } while (vlrLuminosity == -1);
-            sensors.add(new Luminosity("" + vlrLuminosity));
+            sensors.add(new Luminosity( vlrLuminosity + " %"));
         } catch (InterruptedException | RemoteException e) {
             e.printStackTrace();
         }
@@ -115,9 +121,9 @@ public class SensorListViewModel extends ViewModel {
         );
     }
 
-    private IOnGetData mOnGetData;
+    private Set<IOnGetData> mOnGetData = new HashSet<>();
     public void refresh(IOnGetData onGetData) {
-        mOnGetData = onGetData;
+        mOnGetData.add(onGetData);
         mGetDataHandler.removeCallbacks(mGetDataRunnable);
         mGetDataHandler.post(mGetDataRunnable);
     }

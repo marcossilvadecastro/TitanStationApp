@@ -50,6 +50,10 @@ public class SensorListViewModel extends ViewModel {
             }else{
                 fakeSensors();
             }
+
+            if(mOnGetData != null){
+                mOnGetData.onGetDada(sensors);
+            }
         }
     };
 
@@ -102,7 +106,7 @@ public class SensorListViewModel extends ViewModel {
     }
 
     public void fakeSensors() {
-        sensors = new ArrayList<Sensor>(
+        sensors = new ArrayList<>(
                 Arrays.asList(
                         new Temperature( "32 °C"),
                         new Humidity("80%"),
@@ -111,12 +115,16 @@ public class SensorListViewModel extends ViewModel {
         );
     }
 
-    public List<Sensor> getSensors() {
-        return sensors;
-    }
-
-    public void refresh() {
+    private IOnGetData mOnGetData;
+    public void refresh(IOnGetData onGetData) {
+        mOnGetData = onGetData;
         mGetDataHandler.removeCallbacks(mGetDataRunnable);
         mGetDataHandler.post(mGetDataRunnable);
     }
+
+    interface IOnGetData {
+
+        void onGetDada(List<Sensor> sensors);
+    }
+
 }

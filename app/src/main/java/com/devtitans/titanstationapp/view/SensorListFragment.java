@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import com.devtitans.titanstationapp.R;
 import com.devtitans.titanstationapp.model.Sensor;
 
+import java.util.List;
+
 /**
  * A fragment representing a list of Items.
  */
@@ -53,8 +55,7 @@ public class SensorListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(SensorListViewModel.class);
-        viewModel.refresh();
-        recyclerView.setAdapter(new SensorRecyclerViewAdapter(viewModel.getSensors()));
+        viewModel.refresh(sensors -> recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors)));
     }
 
 

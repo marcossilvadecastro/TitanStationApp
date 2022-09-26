@@ -13,11 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TitanStationApp"
         tools:targetApi="31">
+
+        <uses-library
+            android:name="devtitans.adademanager"
+            android:required="true" />
+
         <activity
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:theme="@style/Theme.TitanStationApp.Fullscreen" >
+            android:theme="@style/Theme.TitanStationApp.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,9 +32,7 @@
         <activity
             android:name=".view.MainActivity"
             android:exported="false"
-            android:label="@string/app_title">
-
-        </activity>
+            android:label="@string/app_title"></activity>
     </application>
 
 </manifest>

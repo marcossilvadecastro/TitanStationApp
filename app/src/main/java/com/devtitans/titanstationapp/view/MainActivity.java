@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         viewModel = new ViewModelProvider(this).get(SensorListViewModel.class);
-        //viewModel.initialize();
+        viewModel.initialize();
         viewModel.tryConnect();
     }
 

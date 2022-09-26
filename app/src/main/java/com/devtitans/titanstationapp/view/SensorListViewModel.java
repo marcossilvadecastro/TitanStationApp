@@ -29,16 +29,11 @@ public class SensorListViewModel extends ViewModel {
     }
 
     public void tryConnect() {
-        isConnected = true; //getConnection();
-    }
-
-
-    private boolean getConnection() {
         try {
-            return manager.connect() != 0;
+            isConnected =  manager.connect() != 0;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            isConnected =  false;
         }
     }
 

@@ -45,7 +45,11 @@ public class SensorListViewModel extends ViewModel {
     private final Runnable mGetDataRunnable = new Runnable() {
         @Override
         public void run() {
-            getData();
+            if(isConnected){
+                getData();
+            }else{
+                fakeSensors();
+            }
         }
     };
 

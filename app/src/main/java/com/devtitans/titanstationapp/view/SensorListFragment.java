@@ -53,7 +53,7 @@ public class SensorListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(SensorListViewModel.class);
-        viewModel.fakeSensors();
+        viewModel.refresh();
         recyclerView.setAdapter(new SensorRecyclerViewAdapter(viewModel.getSensors()));
     }
 

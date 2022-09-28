@@ -66,9 +66,11 @@ public class SensorListFragment extends Fragment {
 
     private void isLoading(Boolean isLoading){
         if(isLoading){
+            shimmerFrameLayout.setVisibility(View.VISIBLE);
             shimmerFrameLayout.startShimmer();
         }else{
             shimmerFrameLayout.stopShimmer();
+            shimmerFrameLayout.setVisibility(View.GONE);
         }
     }
 

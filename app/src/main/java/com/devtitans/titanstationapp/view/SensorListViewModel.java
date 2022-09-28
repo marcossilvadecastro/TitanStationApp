@@ -1,9 +1,12 @@
 package com.devtitans.titanstationapp.view;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devtitans.titanstationapp.model.Humidity;
@@ -24,6 +27,11 @@ public class SensorListViewModel extends ViewModel {
     private AdadeManager manager;
     private boolean isConnected = false;
     private List<Sensor> sensors = new ArrayList<>();
+    private MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(true);
+    public LiveData<Boolean> isLoading = _isLoading;
+
+    private MutableLiveData<List<Sensor>> _sensorsLD = new MutableLiveData<>(sensors);
+    LiveData<List<Sensor>> sensorsLD = _sensorsLD;
 
 
     public void initialize() {
@@ -43,29 +51,9 @@ public class SensorListViewModel extends ViewModel {
         return isConnected;
     }
 
-    private final Handler mGetDataHandler = new Handler(Looper.myLooper());
-    private final Runnable mGetDataRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if(isConnected){
-                getData();
-            }else{
-                fakeSensors();
-            }
-
-            if(mOnGetData != null){
-                for (IOnGetData data : mOnGetData){
-                    if(data != null){
-                        data.onGetDada(sensors);
-                    }
-                }
-            }
-        }
-    };
-
     private void getData() {
         int count = 0;
-        int tryCount = 100;
+        int tryCount = 15;
         int waitTime = 50;
 
         this.sensors.clear();
@@ -121,16 +109,23 @@ public class SensorListViewModel extends ViewModel {
         );
     }
 
-    private Set<IOnGetData> mOnGetData = new HashSet<>();
-    public void refresh(IOnGetData onGetData) {
-        mOnGetData.add(onGetData);
-        mGetDataHandler.removeCallbacks(mGetDataRunnable);
-        mGetDataHandler.post(mGetDataRunnable);
+    public void refresh() {
+        new GetDataAsyncTask().execute();
+    }
+    private class GetDataAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            _isLoading.postValue(true);
+            if(isConnected){
+                getData();
+            }else{
+                fakeSensors();
+            }
+            _isLoading.postValue(false);
+            _sensorsLD.postValue(sensors);
+            return null;
+        }
     }
 
-    interface IOnGetData {
-
-        void onGetDada(List<Sensor> sensors);
-    }
 
 }

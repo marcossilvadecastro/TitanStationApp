@@ -43,4 +43,5 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation files('/home/devtitans-1/aosp-backup/out/soong/.intermediates/device/devtitans/adade/Adade' +
             'Manager/devtitans.adademanager/android_common/javac/devtitans.adademanager.jar')
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

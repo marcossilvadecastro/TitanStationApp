@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 
 import com.devtitans.titanstationapp.R;
 import com.devtitans.titanstationapp.model.Sensor;
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class SensorListFragment extends Fragment {
     private int mColumnCount = 1;
 
     private SensorListViewModel viewModel;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,7 +58,18 @@ public class SensorListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(SensorListViewModel.class);
-        viewModel.refresh(sensors -> recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors)));
+        shimmerFrameLayout.stopShimmer();
+        viewModel.isLoading.observe(requireActivity(), this::isLoading);
+        viewModel.sensorsLD.observe(requireActivity(), sensors -> recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors)));
+        viewModel.refresh();
+    }
+
+    private void isLoading(Boolean isLoading){
+        if(isLoading){
+            shimmerFrameLayout.startShimmer();
+        }else{
+            shimmerFrameLayout.stopShimmer();
+        }
     }
 
 
@@ -65,17 +79,16 @@ public class SensorListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+        Context context = view.getContext();
+        recyclerView = view.findViewById(R.id.list);
+        shimmerFrameLayout = view.findViewById(R.id.shimmerLayout);
 
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
+
         return view;
     }
 }

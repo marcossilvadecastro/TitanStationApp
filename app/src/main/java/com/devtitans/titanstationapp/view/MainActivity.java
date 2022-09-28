@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.refresh:
-                viewModel.refresh(null);
+                viewModel.refresh();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

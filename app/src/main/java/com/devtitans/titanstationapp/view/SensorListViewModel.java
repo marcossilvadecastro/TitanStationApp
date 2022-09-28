@@ -53,7 +53,7 @@ public class SensorListViewModel extends ViewModel {
 
     private void getData() {
         int count = 0;
-        int tryCount = 15;
+        int tryCount = 20;
         int waitTime = 50;
 
         this.sensors.clear();

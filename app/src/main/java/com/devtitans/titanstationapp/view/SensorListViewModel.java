@@ -68,7 +68,10 @@ public class SensorListViewModel extends ViewModel {
                     vlrTemperature = -2;
                 }
             } while (vlrTemperature == -1);
-            sensors.add(new Temperature(vlrTemperature/100 +  " °C"));
+            if(vlrTemperature != -2) {
+                vlrTemperature /= 100;
+            }
+            sensors.add(new Temperature(vlrTemperature + " °C"));
 
             count = 0;
             int vlrHumidity = 0;
@@ -80,7 +83,10 @@ public class SensorListViewModel extends ViewModel {
                     vlrHumidity = -2;
                 }
             } while (vlrHumidity == -1);
-            sensors.add(new Humidity(vlrHumidity/100 + " %"));
+            if(vlrHumidity != -2) {
+                vlrHumidity /= 100;
+            }
+            sensors.add(new Humidity(vlrHumidity + " %"));
 
             count = 0;
             int vlrLuminosity = 0;

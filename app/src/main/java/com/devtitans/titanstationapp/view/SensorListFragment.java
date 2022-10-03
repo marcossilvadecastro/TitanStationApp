@@ -10,7 +10,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +25,12 @@ import android.view.ViewGroup;
 
 import com.devtitans.titanstationapp.R;
 import com.devtitans.titanstationapp.model.Sensor;
+import com.devtitans.titanstationapp.worker.GetSensorsWorker;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A fragment representing a list of Items.
@@ -52,7 +59,15 @@ public class SensorListFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
+//        Constraints constraints = new Constraints.Builder()
+//                .setRequiredNetworkType(NetworkType.CONNECTED)
+//                .build();
+//        PeriodicWorkRequest otwRequest =
+//                new PeriodicWorkRequest.Builder(GetSensorsWorker.class, 1, TimeUnit.MINUTES, 1, TimeUnit.SECONDS).setConstraints(constraints).build();
+//        WorkManager.getInstance(requireActivity()).enqueue(otwRequest);
+
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -60,17 +75,30 @@ public class SensorListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(SensorListViewModel.class);
         shimmerFrameLayout.stopShimmer();
         viewModel.isLoading.observe(requireActivity(), this::isLoading);
-        viewModel.sensorsLD.observe(requireActivity(), sensors -> recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors)));
+        viewModel.sensorsLD.observe(requireActivity(), sensors -> {
+            recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors));
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    viewModel.refresh();
+                }
+            };
+            handler.postDelayed(runnable, 10000);
+
+        });
         viewModel.refresh();
     }
 
     private void isLoading(Boolean isLoading){
         if(isLoading){
             shimmerFrameLayout.setVisibility(View.VISIBLE);
+           // recyclerView.setVisibility(View.GONE);
             shimmerFrameLayout.startShimmer();
         }else{
             shimmerFrameLayout.stopShimmer();
             shimmerFrameLayout.setVisibility(View.GONE);
+           // recyclerView.setVisibility(View.VISIBLE);
         }
     }
 

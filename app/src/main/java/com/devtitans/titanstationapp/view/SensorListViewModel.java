@@ -108,8 +108,8 @@ public class SensorListViewModel extends ViewModel {
     public void fakeSensors() {
         sensors = new ArrayList<>(
                 Arrays.asList(
-                        new Temperature( "32 °C"),
-                        new Humidity("80%"),
+                        new Temperature( "99 °C"),
+                        new Humidity("99%"),
                         new Luminosity( "99 cd/m2")
                 )
         );

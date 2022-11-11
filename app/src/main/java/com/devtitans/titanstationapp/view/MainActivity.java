@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.devtitans.titanstationapp.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 
 import devtitans.adademanager.AdadeManager;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(SensorListViewModel.class);
         viewModel.initialize();
         viewModel.tryConnect();
+        //FirebaseApp.initializeApp(this);
     }
 
     @Override

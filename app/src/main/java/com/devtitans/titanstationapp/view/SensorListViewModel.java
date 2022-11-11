@@ -13,9 +13,13 @@ import com.devtitans.titanstationapp.model.Humidity;
 import com.devtitans.titanstationapp.model.Luminosity;
 import com.devtitans.titanstationapp.model.Sensor;
 import com.devtitans.titanstationapp.model.Temperature;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +37,7 @@ public class SensorListViewModel extends ViewModel {
     private MutableLiveData<List<Sensor>> _sensorsLD = new MutableLiveData<>(sensors);
     LiveData<List<Sensor>> sensorsLD = _sensorsLD;
 
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
     public void initialize() {
         manager = AdadeManager.getInstance();
@@ -105,12 +110,46 @@ public class SensorListViewModel extends ViewModel {
         }
     }
 
+    private String leitura = null;
+    public void setLeitura(List<Sensor> sensors){
+        float temperatura = 0;
+        float umidade = 0;
+        float luminosidade = 0;
+        int chuva = 0;
+        float qchuva = 0;
+        float vento = 0;
+        float direcao = 0;
+
+        for(Sensor sensor : sensors){
+            if(sensor instanceof Temperature){
+                temperatura = Float.parseFloat(sensor.getValue());
+            }else if(sensor instanceof Luminosity){
+                luminosidade = Float.parseFloat(sensor.getValue());
+            }else if(sensor instanceof Humidity) {
+                umidade =  Float.parseFloat(sensor.getValue());
+            }
+        }
+
+        this.leitura = String.format("{\"Temperatura\": %.2f," +
+                "\"Umidade\": %.2f," +
+                "\"Luminosidade\": %.2f," +
+                "\"Chuva\": %d," +
+                "\"Qchuva\": %.2f," +
+                "\"Vento\": %.2f," +
+                "\"Direcao\": %s}",temperatura,umidade,luminosidade,chuva,qchuva,vento,direcao);
+
+        Date dataHoraAtual = new Date();
+        String data = new SimpleDateFormat("dd-MM-yyyy").format(dataHoraAtual);
+        String hora = new SimpleDateFormat("HH-mm-ss").format(dataHoraAtual);
+        databaseReference.child("leituras").child(data + "-" + hora).setValue(leitura);
+    }
+
     public void fakeSensors() {
         sensors = new ArrayList<>(
                 Arrays.asList(
-                        new Temperature( "99 °C"),
-                        new Humidity("99%"),
-                        new Luminosity( "99 cd/m2")
+                        new Temperature( "99"),
+                        new Humidity("99"),
+                        new Luminosity( "99")
                 )
         );
     }

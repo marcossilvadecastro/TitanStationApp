@@ -8,6 +8,5 @@ public class Temperature extends Sensor{
         super("Temperature", value);
 
         setImage(R.drawable.ic_baseline_whatshot_24);
-
     }
 }

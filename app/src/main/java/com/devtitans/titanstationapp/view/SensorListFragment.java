@@ -77,10 +77,13 @@ public class SensorListFragment extends Fragment {
         viewModel.isLoading.observe(requireActivity(), this::isLoading);
         viewModel.sensorsLD.observe(requireActivity(), sensors -> {
             recyclerView.setAdapter(new SensorRecyclerViewAdapter(sensors));
+
+            viewModel.setLeitura(sensors);
             Handler handler = new Handler();
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
+
                     viewModel.refresh();
                 }
             };

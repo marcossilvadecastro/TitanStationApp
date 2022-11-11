@@ -84,7 +84,7 @@ public class SensorListFragment extends Fragment {
                     viewModel.refresh();
                 }
             };
-            handler.postDelayed(runnable, 10000);
+            handler.postDelayed(runnable, 20000);
 
         });
         viewModel.refresh();
